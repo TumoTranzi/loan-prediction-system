@@ -1,3 +1,5 @@
+import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 """Motz Financial Services — Loan Prediction Dashboard.
 
 A modern, interactive Streamlit dashboard for predicting loan approvals.
@@ -48,7 +50,7 @@ st.markdown("""
 @st.cache_resource
 def load_model():
     try:
-        return joblib.load("models/best_model.joblib")
+        return joblib.load(os.path.join(BASE_DIR, "models", "best_model.joblib"))
     except FileNotFoundError:
         st.error("⚠️ Model not found. Please run `python train_pipeline.py` first.")
         st.stop()
@@ -63,7 +65,7 @@ with st.sidebar:
     st.markdown("### Model Performance")
     st.markdown("---")
     try:
-        comp = pd.read_csv("models/model_comparison.csv", index_col=0)
+        comp = pd.read_csv(os.path.join(BASE_DIR, "models", "model_comparison.csv"), index_col=0)
         st.dataframe((comp * 100).round(1).style.highlight_max(axis=0, color='#3b82f6').format("{:.1f}%"))
     except FileNotFoundError:
         st.info("Model metrics not found.")
@@ -245,3 +247,5 @@ with st.expander("🧪 Test Model on Historical Data (Examiner Demo)"):
 # Footer Copyright
 # --------------------------------------------------------------------------- #
 st.markdown('<div class="footer">© 2026 Motz Financial Services. All rights reserved.</div>', unsafe_allow_html=True)
+
+
