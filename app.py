@@ -44,7 +44,7 @@ st.markdown("""
     
     /* Footer */
     .footer { text-align: center; color: #94a3b8; font-size: 0.9rem; padding: 2rem 0 1rem 0; margin-top: 3rem; border-top: 1px solid #334155; }
-</style>
+label[data-testid="stWidgetLabel"] p, label[data-testid="stWidgetLabel"] span, label[data-testid="stWidgetLabel"] div { color: #FFFFFF !important; font-weight: 600 !important; } div[data-testid="stSelectbox"] label p, div[data-testid="stNumberInput"] label p, div[data-testid="stTextInput"] label p, div[data-testid="stSlider"] label p, div[data-testid="stRadio"] label p, div[data-testid="stCheckbox"] label p, div[data-testid="stForm"] label p { color: #FFFFFF !important; } </style>
 """, unsafe_allow_html=True)
 
 @st.cache_resource
