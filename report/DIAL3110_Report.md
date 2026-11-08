@@ -2,12 +2,18 @@
 
 **DIAL3110 Fundamentals of Artificial Intelligence**
 
-**Group members:** (add 3 names + roles)
+# Team
+
+| Member | Responsibility |
+|---|---|
+| Member 1 | Data gathering, cleaning, descriptive analysis (Task 1) |
+| Member 2 | Preprocessing, model training and tuning (Tasks 2, 4, 5) |
+| Member 3 | Dashboard, report and presentation (Tasks 6, 8) |
 
 ---
 
 ## Abstract
-(Write 120-180 words: problem, dataset of 614 applications, three models compared (LR, RF, GB), Logistic Regression selected with F1 0.9081, deployed Streamlit dashboard for real-time and batch prediction.)
+This report presents a machine learning system for predicting loan approval at Motz Financial Services. Using a public dataset of 614 loan applications with 13 applicant, income, loan and credit features, we implement a reproducible pipeline covering data cleaning (median/mode imputation, IQR outlier flagging), feature engineering (TotalIncome, LoanAmount_log, EMI, Balance_Income), and preprocessing (one-hot encoding, standard scaling). Three classifiers - Logistic Regression, Random Forest and Gradient Boosting - were trained with stratified 80/20 splits and tuned using 5-fold GridSearchCV scored by F1. On the held-out test set, Logistic Regression achieved the best F1 (0.9081) and ROC-AUC (0.8437), with recall of 0.9882 - an attractive property for lending, where false rejections of creditworthy applicants are costly. The tuned pipeline is deployed as a live Streamlit dashboard supporting both single and batch CSV prediction, with no retraining required on the cloud.
 
 ---
 
@@ -96,9 +102,35 @@ This satisfies the assignment requirement that the model be testable on unseen o
 ---
 
 ## 3. Conclusion
-(Write one paragraph: Logistic Regression achieved the best F1 (0.9081) and ROC-AUC (0.8437); a live Streamlit dashboard supports both single and batch prediction; limitations include small dataset and test-set model selection; future work includes class-weight tuning, additional models (XGBoost), and larger datasets.)
+Logistic Regression achieved the strongest overall performance on the held-out test set (F1 = 0.9081, ROC-AUC = 0.8437, recall = 0.9882), outperforming Random Forest and Gradient Boosting on this small 614-row dataset, where the engineered features already capture most of the predictive signal and tree ensembles are more prone to overfitting. The trained pipeline is deployed as a live Streamlit dashboard at https://loan-prediction-system-ondttmjtbnxjjptr4bg2gm.streamlit.app/, providing both interactive single-applicant prediction and batch CSV scoring - the same interface can be used to evaluate the formatted out-of-sample data on presentation day. Limitations include the modest dataset size, a model-selection rule that uses test-set F1 which can slightly overstate generalisation, and the absence of calibrated probability thresholds for regulatory use. Future work includes class-weight tuning and SMOTE for imbalance, adding XGBoost or LightGBM for comparison, calibration curves, and validation on larger, more recent loan portfolios.
 
 ---
 
 ## References
-(IEEE style, 20+ references. To be added.)
+## References
+
+[1] F. Pedregosa et al., Scikit-learn: Machine learning in Python, Journal of Machine Learning Research, vol. 12, pp. 2825-2830, 2011.
+[2] L. Breiman, Random forests, Machine Learning, vol. 45, no. 1, pp. 5-32, 2001.
+[3] J. H. Friedman, Greedy function approximation: A gradient boosting machine, Annals of Statistics, vol. 29, no. 5, pp. 1189-1232, 2001.
+[4] D. W. Hosmer, S. Lemeshow, and R. X. Sturdivant, Applied Logistic Regression, 3rd ed. Hoboken, NJ: Wiley, 2013.
+[5] T. Hastie, R. Tibshirani, and J. Friedman, The Elements of Statistical Learning, 2nd ed. New York: Springer, 2009.
+[6] G. James, D. Witten, T. Hastie, and R. Tibshirani, An Introduction to Statistical Learning. New York: Springer, 2013.
+[7] T. Fawcett, An introduction to ROC analysis, Pattern Recognition Letters, vol. 27, no. 8, pp. 861-874, 2006.
+[8] D. M. Powers, Evaluation: From precision, recall and F-measure to ROC, informedness, markedness and correlation, Journal of Machine Learning Technologies, vol. 2, no. 1, pp. 37-63, 2011.
+[9] N. V. Chawla, K. W. Bowyer, L. O. Hall, and W. P. Kegelmeyer, SMOTE: Synthetic minority over-sampling technique, Journal of Artificial Intelligence Research, vol. 16, pp. 321-357, 2002.
+[10] C. M. Bishop, Pattern Recognition and Machine Learning. New York: Springer, 2006.
+[11] T. Chen and C. Guestrin, XGBoost: A scalable tree boosting system, in Proc. 22nd ACM SIGKDD, 2016, pp. 785-794.
+[12] G. Ke et al., LightGBM: A highly efficient gradient boosting decision tree, in Advances in Neural Information Processing Systems, vol. 30, 2017.
+[13] J. Brownlee, Imbalanced Classification with Python. Melbourne: Machine Learning Mastery, 2020.
+[14] A. Geron, Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow, 2nd ed. Sebastopol, CA: O Reilly, 2019.
+[15] S. Raschka and V. Mirjalili, Python Machine Learning, 3rd ed. Birmingham: Packt, 2019.
+[16] Streamlit Inc., Streamlit documentation, 2024. [Online]. Available: https://docs.streamlit.io
+[17] Streamlit Inc., Streamlit Community Cloud, 2024. [Online]. Available: https://docs.streamlit.io/streamlit-community-cloud
+[18] Joblib Developers, Joblib: Running Python functions as pipeline jobs, 2024. [Online]. Available: https://joblib.readthedocs.io
+[19] Pandas Development Team, pandas documentation, 2024. [Online]. Available: https://pandas.pydata.org/docs/
+[20] NumPy Developers, NumPy documentation, 2024. [Online]. Available: https://numpy.org/doc/
+[21] scikit-learn Developers, Pipeline and ColumnTransformer, 2024. [Online]. Available: https://scikit-learn.org/stable/modules/compose.html
+[22] Kaggle, Loan prediction dataset, 2024. [Online]. Available: https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset
+[23] Y. Freund and R. E. Schapire, A decision-theoretic generalization of on-line learning and an application to boosting, Journal of Computer and System Sciences, vol. 55, no. 1, pp. 119-139, 1997.
+[24] L. Breiman, J. Friedman, C. J. Stone, and R. A. Olshen, Classification and Regression Trees. Boca Raton, FL: CRC Press, 1984.
+[25] S. B. Kotsiantis, Supervised machine learning: A review of classification techniques, Informatica, vol. 31, pp. 249-268, 2007.
