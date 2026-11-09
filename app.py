@@ -24,49 +24,59 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Global Light Theme */
-    .stApp { background-color: #f8fafc; color: #1e293b !important; }
+    /* Dark Theme Background matching screenshot */
+    .stApp { background-color: #0e1117 !important; color: #fafafa !important; }
     
-    /* Force all text, labels, and markdown to be dark */
-    h1, h2, h3, h4, h5, h6, p, span, div, label { color: #1e293b !important; }
+    /* Force all text, labels, and headings to be white */
+    h1, h2, h3, h4, h5, h6, p, span, div, label { color: #fafafa !important; }
     
     /* Input Labels (Gender, Married, etc.) */
     label[data-testid="stWidgetLabel"] p, 
     div[data-testid="stMarkdownContainer"] p {
-        color: #1e293b !important;
+        color: #fafafa !important;
         font-weight: 600 !important;
     }
 
-    /* Sidebar text */
+    /* Sidebar dark background */
+    [data-testid="stSidebar"] { background-color: #161b22 !important; }
     [data-testid="stSidebar"] p, [data-testid="stSidebar"] span, [data-testid="stSidebar"] h3 {
-        color: #1e293b !important;
+        color: #fafafa !important;
+    }
+
+    /* Input Fields (Make them dark grey like the screenshot) */
+    .stSelectbox div[data-baseweb="select"], 
+    .stNumberInput div[data-baseweb="input"],
+    .stTextInput div[data-baseweb="input"] {
+        background-color: #1e232d !important;
+        border: 1px solid #30363d !important;
+        border-radius: 6px !important;
     }
 
     /* Primary Buttons */
     .stButton > button {
-        background-color: #2563eb !important;
-        color: #ffffff !important;
-        border-radius: 8px !important;
-        border: none !important;
+        background-color: #21262d !important;
+        color: #fafafa !important;
+        border: 1px solid #30363d !important;
+        border-radius: 6px !important;
         font-weight: 600 !important;
         padding: 0.6rem 2rem !important;
         width: 100%;
         transition: all 0.2s !important;
     }
     .stButton > button:hover {
-        background-color: #1d4ed8 !important;
-        transform: translateY(-2px);
+        background-color: #30363d !important;
+        border-color: #8b949e !important;
     }
     
     /* Result Boxes */
-    .result-success { background: #ecfdf5; border-left: 5px solid #10b981; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; color: #065f46 !important; }
-    .result-success h2, .result-success p { color: #065f46 !important; }
+    .result-success { background: rgba(16, 185, 129, 0.1); border: 1px solid #10b981; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; color: #fafafa !important; }
+    .result-success h2, .result-success p { color: #10b981 !important; }
     
-    .result-danger { background: #fef2f2; border-left: 5px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; color: #991b1b !important; }
-    .result-danger h2, .result-danger p { color: #991b1b !important; }
+    .result-danger { background: rgba(239, 68, 68, 0.1); border: 1px solid #ef4444; border-radius: 8px; padding: 1.5rem; margin-top: 1rem; color: #fafafa !important; }
+    .result-danger h2, .result-danger p { color: #ef4444 !important; }
     
     /* Footer */
-    .footer { text-align: center; color: #64748b !important; font-size: 0.9rem; padding: 2rem 0 1rem 0; margin-top: 3rem; border-top: 1px solid #e2e8f0; }
+    .footer { text-align: center; color: #8b949e !important; font-size: 0.9rem; padding: 2rem 0 1rem 0; margin-top: 3rem; border-top: 1px solid #30363d; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -98,16 +108,16 @@ with st.sidebar:
 # --------------------------------------------------------------------------- #
 # Main UI
 # --------------------------------------------------------------------------- #
-st.markdown('<div class="main-title" style="color: #1e293b !important; font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">🏦 Motz Financial Services</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title" style="color: #64748b !important; font-size: 1.1rem; margin-bottom: 2rem;">Intelligent Loan Approval Prediction System</div>', unsafe_allow_html=True)
+st.markdown('<div class="main-title" style="color: #fafafa !important; font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem;">🏦 Motz Financial Services</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title" style="color: #8b949e !important; font-size: 1.1rem; margin-bottom: 2rem;">Intelligent Loan Approval Prediction System</div>', unsafe_allow_html=True)
 
 col_form, col_res = st.columns([1.2, 1], gap="large")
 
 with col_form:
-    st.markdown('<h3 style="color: #1e293b !important;">📋 Applicant Details</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #fafafa !important;">📋 Applicant Details</h3>', unsafe_allow_html=True)
     with st.form("applicant_form"):
         
-        st.markdown('<p style="color: #1e293b !important; font-weight: bold;">Personal Information</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #fafafa !important; font-weight: bold;">Personal Information</p>', unsafe_allow_html=True)
         c1, c2, c3 = st.columns(3)
         gender = c1.selectbox("Gender", ["Male", "Female"])
         married = c2.selectbox("Married", ["Yes", "No"])
@@ -115,7 +125,7 @@ with col_form:
         education = st.selectbox("Education Level", ["Graduate", "Not Graduate"])
         
         st.markdown("---")
-        st.markdown('<p style="color: #1e293b !important; font-weight: bold;">Financial Details</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #fafafa !important; font-weight: bold;">Financial Details</p>', unsafe_allow_html=True)
         c4, c5 = st.columns(2)
         applicant_income = c4.number_input("Applicant Income (Monthly)", min_value=0, value=5000, step=500)
         coapplicant_income = c5.number_input("Co-applicant Income (Monthly)", min_value=0, value=0, step=500)
@@ -125,7 +135,7 @@ with col_form:
         loan_term = c7.selectbox("Loan Term (Months)", [360, 180, 120, 240, 300, 480, 84, 60, 36, 12])
         
         st.markdown("---")
-        st.markdown('<p style="color: #1e293b !important; font-weight: bold;">Risk Assessment</p>', unsafe_allow_html=True)
+        st.markdown('<p style="color: #fafafa !important; font-weight: bold;">Risk Assessment</p>', unsafe_allow_html=True)
         
         cibil_score = st.slider(
             "CIBIL Score (Credit Bureau Rating)", 
@@ -150,7 +160,7 @@ with col_form:
         submitted = st.form_submit_button("Run Prediction Analysis")
 
 with col_res:
-    st.markdown('<h3 style="color: #1e293b !important;">📊 Prediction Results</h3>', unsafe_allow_html=True)
+    st.markdown('<h3 style="color: #fafafa !important;">📊 Prediction Results</h3>', unsafe_allow_html=True)
     
     if submitted:
         row = pd.DataFrame([{
@@ -173,32 +183,32 @@ with col_res:
 
         # Result Display
         if pred == 1:
-            st.markdown(f'<div class="result-success"><h2 style="color: #065f46 !important; margin:0;">✅ LOAN APPROVED</h2><p style="color: #065f46 !important; margin:0;">Confidence: {proba:.1%}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-success"><h2 style="color: #10b981 !important; margin:0;">✅ LOAN APPROVED</h2><p style="color: #fafafa !important; margin:0;">Confidence: {proba:.1%}</p></div>', unsafe_allow_html=True)
             status_color = "#10b981"
         else:
-            st.markdown(f'<div class="result-danger"><h2 style="color: #991b1b !important; margin:0;">❌ LOAN REJECTED</h2><p style="color: #991b1b !important; margin:0;">Probability of Approval: {proba:.1%}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-danger"><h2 style="color: #ef4444 !important; margin:0;">❌ LOAN REJECTED</h2><p style="color: #fafafa !important; margin:0;">Probability of Approval: {proba:.1%}</p></div>', unsafe_allow_html=True)
             status_color = "#ef4444"
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Gauge Chart (Dark text for white background)
+        # Gauge Chart (White text for dark background)
         fig = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = proba * 100,
-            title = {'text': "Approval Probability (%)", 'font': {'color': '#1e293b'}},
-            number = {'suffix': "%", 'font': {'color': '#1e293b'}},
+            title = {'text': "Approval Probability (%)", 'font': {'color': '#fafafa'}},
+            number = {'suffix': "%", 'font': {'color': '#fafafa'}},
             gauge = {
-                'axis': {'range': [None, 100], 'tickcolor': "#64748b"},
+                'axis': {'range': [None, 100], 'tickcolor': "#8b949e"},
                 'bar': {'color': status_color},
-                'bgcolor': "#f1f5f9",
+                'bgcolor': "#161b22",
                 'steps': [
                     {'range': [0, 50], 'color': "rgba(239, 68, 68, 0.2)"},
                     {'range': [50, 100], 'color': "rgba(16, 185, 129, 0.2)"}
                 ],
-                'threshold': {'line': {'color': "#64748b", 'width': 2}, 'thickness': 0.75, 'value': 50}
+                'threshold': {'line': {'color': "#fafafa", 'width': 2}, 'thickness': 0.75, 'value': 50}
             }
         ))
-        fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", font={'color': "#1e293b"}, height=250, margin=dict(l=20, r=20, t=40, b=20))
+        fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", font={'color': "#fafafa"}, height=250, margin=dict(l=20, r=20, t=40, b=20))
         st.plotly_chart(fig, use_container_width=True)
 
         # Explainability
@@ -231,7 +241,7 @@ with col_res:
         
     else:
         st.info("👈 Fill out the applicant details on the left and click **Run Prediction Analysis**.")
-        st.markdown('<div style="text-align: center; margin-top: 50px; opacity: 0.5;"><h1 style="font-size: 80px; color: #1e293b !important;">📊</h1><p style="color: #1e293b !important;">Awaiting applicant data...</p></div>', unsafe_allow_html=True)
+        st.markdown('<div style="text-align: center; margin-top: 50px; opacity: 0.5;"><h1 style="font-size: 80px; color: #fafafa !important;">📊</h1><p style="color: #fafafa !important;">Awaiting applicant data...</p></div>', unsafe_allow_html=True)
 
 # Footer
 st.markdown("---")
