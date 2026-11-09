@@ -24,27 +24,17 @@ st.set_page_config(
 
 st.markdown("""
 <style>
-    /* Global Styles */
-    .stApp { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #f8fafc; }
-    
-    /* Header Styling */
-    .main-title { font-size: 2.5rem; font-weight: 700; background: -webkit-linear-gradient(45deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
-    .sub-title { font-size: 1.1rem; color: #94a3b8; margin-bottom: 2rem; }
-    
-    /* Input Styling */
-    .stSelectbox div[data-baseweb="select"], .stNumberInput div[data-baseweb="input"] { background-color: #0f172a !important; border: 1px solid #334155 !important; border-radius: 8px !important; }
-    
-    /* Button Styling */
-    .stButton > button { background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%); color: white; font-weight: 600; border: none; padding: 0.6rem 2rem; border-radius: 8px; transition: transform 0.2s, box-shadow 0.2s; width: 100%; }
-    .stButton > button:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4); }
-    
-    /* Result Boxes */
-    .result-success { background: linear-gradient(90deg, rgba(16, 185, 129, 0.2) 0%, rgba(5, 150, 105, 0.1) 100%); border-left: 5px solid #10b981; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; }
-    .result-danger { background: linear-gradient(90deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.1) 100%); border-left: 5px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; }
-    
-    /* Footer */
-    .footer { text-align: center; color: #94a3b8; font-size: 0.9rem; padding: 2rem 0 1rem 0; margin-top: 3rem; border-top: 1px solid #334155; }
-label[data-testid="stWidgetLabel"] p, label[data-testid="stWidgetLabel"] span, label[data-testid="stWidgetLabel"] div { color: #FFFFFF !important; font-weight: 600 !important; } div[data-testid="stSelectbox"] label p, div[data-testid="stNumberInput"] label p, div[data-testid="stTextInput"] label p, div[data-testid="stSlider"] label p, div[data-testid="stRadio"] label p, div[data-testid="stCheckbox"] label p, div[data-testid="stForm"] label p { color: #FFFFFF !important; } </style>
+    /* Global Light Theme */
+    .stApp { background-color: #f8fafc; color: #1e293b; }
+    .main-title { font-size: 2.5rem; font-weight: 800; color: #1e293b; margin-bottom: 0.5rem; }
+    .sub-title { font-size: 1.1rem; color: #64748b; margin-bottom: 2rem; }
+    label[data-testid="stWidgetLabel"] p, div[data-testid="stMarkdownContainer"] p { color: #475569 !important; font-weight: 600 !important; }
+    .stButton > button { background-color: #2563eb !important; color: white !important; border-radius: 8px !important; border: none !important; font-weight: 600 !important; padding: 0.6rem 2rem !important; width: 100%; transition: all 0.2s !important; }
+    .stButton > button:hover { background-color: #1d4ed8 !important; transform: translateY(-2px); }
+    .result-success { background: #ecfdf5; border-left: 5px solid #10b981; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; color: #065f46; }
+    .result-danger { background: #fef2f2; border-left: 5px solid #ef4444; padding: 1.5rem; border-radius: 8px; margin-top: 1rem; color: #991b1b; }
+    .footer { text-align: center; color: #94a3b8; font-size: 0.9rem; padding: 2rem 0 1rem 0; margin-top: 3rem; border-top: 1px solid #e2e8f0; }
+</style>
 """, unsafe_allow_html=True)
 
 @st.cache_resource
@@ -150,32 +140,32 @@ with col_res:
 
         # Result Display
         if pred == 1:
-            st.markdown(f'<div class="result-success"><h2 style="color: #10b981; margin:0;">✅ LOAN APPROVED</h2><p style="color: #94a3b8; margin:0;">Confidence: {proba:.1%}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-success"><h2 style="color: #10b981; margin:0;">✅ LOAN APPROVED</h2><p style="color: #065f46; margin:0;">Confidence: {proba:.1%}</p></div>', unsafe_allow_html=True)
             status_color = "#10b981"
         else:
-            st.markdown(f'<div class="result-danger"><h2 style="color: #ef4444; margin:0;">❌ LOAN REJECTED</h2><p style="color: #94a3b8; margin:0;">Probability of Approval: {proba:.1%}</p></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="result-danger"><h2 style="color: #ef4444; margin:0;">❌ LOAN REJECTED</h2><p style="color: #991b1b; margin:0;">Probability of Approval: {proba:.1%}</p></div>', unsafe_allow_html=True)
             status_color = "#ef4444"
 
         st.markdown("<br>", unsafe_allow_html=True)
 
-        # Gauge Chart
+        # Gauge Chart (Dark text for white background)
         fig = go.Figure(go.Indicator(
             mode = "gauge+number",
             value = proba * 100,
-            title = {'text': "Approval Probability (%)", 'font': {'color': 'white'}},
-            number = {'suffix': "%", 'font': {'color': 'white'}},
+            title = {'text': "Approval Probability (%)", 'font': {'color': '#1e293b'}},
+            number = {'suffix': "%", 'font': {'color': '#1e293b'}},
             gauge = {
-                'axis': {'range': [None, 100], 'tickcolor': "white"},
+                'axis': {'range': [None, 100], 'tickcolor': "#64748b"},
                 'bar': {'color': status_color},
-                'bgcolor': "#1e293b",
+                'bgcolor': "#f1f5f9",
                 'steps': [
                     {'range': [0, 50], 'color': "rgba(239, 68, 68, 0.2)"},
                     {'range': [50, 100], 'color': "rgba(16, 185, 129, 0.2)"}
                 ],
-                'threshold': {'line': {'color': "white", 'width': 2}, 'thickness': 0.75, 'value': 50}
+                'threshold': {'line': {'color': "#64748b", 'width': 2}, 'thickness': 0.75, 'value': 50}
             }
         ))
-        fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", font={'color': "white"}, height=250, margin=dict(l=20, r=20, t=40, b=20))
+        fig.update_layout(paper_bgcolor="rgba(0,0,0,0)", font={'color': "#1e293b"}, height=250, margin=dict(l=20, r=20, t=40, b=20))
         st.plotly_chart(fig, use_container_width=True)
 
         # Explainability
@@ -247,5 +237,3 @@ with st.expander("🧪 Test Model on Historical Data (Examiner Demo)"):
 # Footer Copyright
 # --------------------------------------------------------------------------- #
 st.markdown('<div class="footer">© 2026 Motz Financial Services. All rights reserved.</div>', unsafe_allow_html=True)
-
-
